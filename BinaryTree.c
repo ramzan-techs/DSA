@@ -26,7 +26,7 @@ void postOrder(struct Node* rootNode){
     postOrder(rootNode->right);
     printf("%d\t",rootNode->data);
 }
-
+//add comment
 //to print or traverse first leaf left node then parent then right leaf node and so on
 void inOrder(struct Node* rootNode){
     if(rootNode==NULL)
