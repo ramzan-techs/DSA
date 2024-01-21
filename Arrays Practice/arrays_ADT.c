@@ -155,6 +155,105 @@ int RBinarySearch(int a[],int l,int h,int key)
     
 }
 
+//for getting value at specific location
+int get(struct Array arr,int index)
+{
+    if(index>=0 && index<arr.length)
+        return arr.A[index];
+}
+
+//for changing value at specific index
+void set(struct Array *arr,int index,int value)
+{
+    if(index>=0 && index<arr->length)
+         arr->A[index] = value;
+}
+
+//for getting max value 
+int max(struct Array arr)
+{
+    int max = arr.A[0];
+    for(int i = 0;i<arr.length;i++)
+        if(max<arr.A[i])
+            max = arr.A[i];
+
+    return max;
+}
+
+//for getting min value 
+int min(struct Array arr)
+{
+    int min = arr.A[0];
+    for(int i = 0;i<arr.length;i++)
+        if(min>arr.A[i])
+            min = arr.A[i];
+
+    return min;
+}
+
+//for getting total sum of all values 
+int sum(struct Array arr)
+{
+    int totalSum = 0;
+    for(int i = 0;i<arr.length;i++)
+        totalSum = totalSum + arr.A[i];
+
+    return totalSum;
+}
+
+//recursive sum finding
+int recursiveSum(int a[],int n)
+{
+    if(n<0) //base condition
+        return 0;
+    else
+        return a[n] + recursiveSum(a,n-1); 
+}
+
+//for finding avg of all values in array
+float average(struct Array arr)
+{
+    int totalSum = 0;
+    for(int i = 0;i<arr.length;i++)
+        totalSum = totalSum + arr.A[i];
+
+    return ((float)totalSum)/((float)arr.length);
+}
+
+//reversing of array
+//1-auxilaryReversing using extra array
+//2-simple reversing without extra array
+
+//1-auxilary reversing
+void auxilaryReverse(struct Array *arr)
+{   
+    int *B;  //extra array
+    //allocating memory in heap
+    B = (int *)malloc(arr->length*sizeof(int));
+    int i,j; //i->will point to last index of original array and will be decrementing
+    //j-> will point to first index of second array and incrementing
+    for(i = arr->length-1,j=0;i>=0;i--,j++)
+        B[j] = arr->A[i]; //storing element in extra array in reverse order
+
+    for(i = 0;i<arr->length;i++)
+        arr->A[i] = B[i];
+
+    free(&B);
+}
+
+//2- simple reverse 
+void reverse(struct Array *arr)
+{
+    int i,j;
+    //i-> will point index incrementing from start
+    //j-> will point index decrementing from last
+
+    for(i=0,j=arr->length-1;i<j;i++,j--)
+        swap(&arr->A[i],&arr->A[j]);
+    
+}
+
+
 //for releasing memory to avoid memory leakage
 void releaseArray(struct Array *arr) {
     free(arr->A);
@@ -191,14 +290,28 @@ void main(){
 
    // printf("\nElement is found at %d",linearSearchMoveToHead(&arr,4));
 
-    printf("\n Element is found at %d using binary search",binarySearch(arr,3));
+    //printf("\n Element is found at %d using binary search",binarySearch(arr,3));
 
-     printf("\n Element is found at %d using binary search",RBinarySearch(arr.A,0,5,3));
+    // printf("\n Element is found at %d using binary search",RBinarySearch(arr.A,0,5,3));
+
+    printf("%d is the max value\n",max(arr));
+     printf("%d is the min value\n",min(arr));
+      printf("%f is the average value\n",average(arr));
+     printf("%d is the sum of values\n",sum(arr));
+      printf("%d is the recursive sum value\n",recursiveSum(arr.A,arr.length -1));
+
+
+
+    //auxilaryReverse(&arr);
+    reverse(&arr);
+       
+
+
 
 
 
     printf("\nElements are : ");
-    add(&arr,20);
+   // add(&arr,20);
    // delete(&arr,1);
     Display(&arr);
 
