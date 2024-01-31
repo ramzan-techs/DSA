@@ -253,6 +253,57 @@ void reverse(struct Array *arr)
     
 }
 
+// to shift array one value right 
+void rightShift(struct Array *arr)
+{   if(arr->length == arr->size)
+       { for(int i=arr->length-1; i>0; i--)
+        {
+            arr->A[i] = arr->A[i-1];
+        }
+        arr->A[0] = 0;
+       }
+    else
+       { for(int i=arr->length; i>0; i--)
+        {
+             arr->A[i] = arr->A[i-1];
+        }
+        arr->A[0] = 0;
+        arr->length = arr->length + 1;
+       }
+}
+
+// to shift array one value left
+void leftShift(struct Array *arr)
+{
+    for(int i = 0; i < arr->length-1; i++)
+    {
+        arr->A[i] = arr->A[i+1];
+    }
+    arr->A[arr->length-1] = 0;
+}
+
+// to left rotate array
+void leftRotate(struct Array *arr)
+{
+    int temp = arr->A[0];
+    for(int i = 0; i < arr->length-1; i++)
+    {
+        arr->A[i] = arr->A[i+1];
+    }
+    arr->A[arr->length-1] = temp;
+}
+
+// to right rotate array
+void rightRotate(struct Array *arr)
+{
+    int temp = arr->A[arr->length-1];
+    for(int i = arr->length - 1; i>0 ; i--)
+    {
+        arr->A[i] = arr->A[i-1];
+    }
+    arr->A[0] = temp;
+}
+
 
 //for releasing memory to avoid memory leakage
 void releaseArray(struct Array *arr) {
@@ -294,19 +345,25 @@ void main(){
 
     // printf("\n Element is found at %d using binary search",RBinarySearch(arr.A,0,5,3));
 
-    printf("%d is the max value\n",max(arr));
-     printf("%d is the min value\n",min(arr));
-      printf("%f is the average value\n",average(arr));
-     printf("%d is the sum of values\n",sum(arr));
-      printf("%d is the recursive sum value\n",recursiveSum(arr.A,arr.length -1));
+    // printf("%d is the max value\n",max(arr));
+    //  printf("%d is the min value\n",min(arr));
+    //   printf("%f is the average value\n",average(arr));
+    //  printf("%d is the sum of values\n",sum(arr));
+    //   printf("%d is the recursive sum value\n",recursiveSum(arr.A,arr.length -1));
 
 
 
     //auxilaryReverse(&arr);
-    reverse(&arr);
+    // reverse(&arr);
        
 
+    // rightShift(&arr);
 
+    // leftShift(&arr);
+
+    // leftRotate(&arr);
+
+    rightRotate(&arr);
 
 
 
